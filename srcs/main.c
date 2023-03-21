@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 12:11:35 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/19 15:49:50 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:12:27 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,5 @@ int main(int ac, char **av)
         ft_error("malloc struct failed", data, 0);
     ft_init(data);
     create_thread(data);
+    while(1);
 }

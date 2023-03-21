@@ -6,11 +6,16 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:29:24 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/19 16:54:30 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:12:12 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int philo_dead(void)
+{
+    return (1);
+}
 
 void    *start_lunch(void *s)
 {
@@ -18,7 +23,15 @@ void    *start_lunch(void *s)
 
     philo = (t_philo *)s;
     if (philo->pos % 2 == 0)
-        usleep(200);
+        ft_usleep(philo->arg->time_eat / 10);
+    while(philo_dead())
+    {
+        take_forks(philo);
+        printf("test\n");
+        // eat_time(philo);
+        // sleep_think_time(philo);
+        // pthread_detach(philo->thread_philo);
+    }
     return (NULL);
 }
 
@@ -27,6 +40,7 @@ void    ft_init(t_data *data)
     int i;
 
     i = 0;
+    data->arg.start_time = get_time();
     while(i < data->arg.nb_philo)
     {
         data->philo[i].pos = i + 1;

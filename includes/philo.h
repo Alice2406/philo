@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:54:58 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/19 15:44:59 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:29:37 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <pthread.h>
+#include <sys/time.h>
 
 typedef struct s_arg {
     int nb_philo;
@@ -23,6 +25,7 @@ typedef struct s_arg {
     int time_sleep;
     int time_dead;
     int nb_eat;
+    long int start_time;
     int finish; //all philo ate nb_eat 
 }               t_arg;
 
@@ -44,5 +47,9 @@ typedef struct s_data {
 void    ft_init(t_data *data);
 void    ft_error(char *msg, t_data *data, int free_philos);
 int create_thread(t_data *data);
+long int get_time(void);
+int ft_usleep(long int ms_time);
+void take_forks(t_philo *philo);
+void    ft_write(char *msg, t_philo *philo);
 
 #endif

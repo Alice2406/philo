@@ -6,7 +6,7 @@
 #    By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/08 16:25:39 by aniezgod          #+#    #+#              #
-#    Updated: 2023/03/14 14:45:48 by aniezgod         ###   ########.fr        #
+#    Updated: 2023/03/21 16:15:10 by aniezgod         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,8 @@ WHITE = \e[0;37m
 SRCS =	./srcs/main.c \
 		./srcs/init.c \
 		./srcs/ft_error.c \
+		./srcs/time.c \
+		./srcs/routine.c \
 
 OBJS = ${SRCS:.c=.o}
 
