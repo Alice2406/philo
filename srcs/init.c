@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:29:24 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/21 19:35:26 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:17:13 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void    *start_lunch(void *s)
     while(philo_dead())
     {
         take_forks(philo);
-        // eat_time(philo);
-        // sleep_think_time(philo);
+        sleep_think(philo);
         // pthread_detach(philo->thread_philo);
     }
     return (NULL);
@@ -40,9 +39,11 @@ void    ft_init(t_data *data)
 
     i = 0;
     data->arg.start_time = get_time();
-	pthread_mutex_init(&data->philo->writing, NULL);
+	pthread_mutex_init(&data->arg.writing, NULL);
+    pthread_mutex_init(&data->arg.eat, NULL);
     while(i < data->arg.nb_philo)
     {
+        data->philo[i].start_eat = data->arg.start_time;
         data->philo[i].pos = i + 1;
         data->philo[i].nb_times_ate = 0;
         pthread_mutex_init(&data->philo[i].lfork, NULL);

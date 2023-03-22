@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 12:11:35 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/21 19:36:01 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:10:42 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,16 @@ int ft_check_param(char **av, int ac, t_data *data)
 
 int main(int ac, char **av)
 {
-    t_data *data;
+    t_data data;
 
     if (ac != 6 && ac != 5)
         return (0);
-    data = malloc(sizeof(t_data));
-    if (!data)
-        ft_error("malloc struct failed", NULL, 0);
-    if(!ft_check_param(av, ac, data))
+    if(!ft_check_param(av, ac, &data))
         return (0);
-    data->philo = malloc(sizeof(t_philo) * data->arg.nb_philo);
-    if (!data->philo)
-        ft_error("malloc struct failed", data, 0);
-    ft_init(data);
-    create_thread(data);
+    data.philo = malloc(sizeof(t_philo) * data.arg.nb_philo);
+    if (!data.philo)
+        ft_error("malloc struct failed", &data, 0);
+    ft_init(&data);
+    create_thread(&data);
     while(1);
 }
