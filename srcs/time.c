@@ -6,40 +6,40 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:21:33 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/22 12:12:48 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:36:30 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long int get_time(void)
+long int	get_time(void)
 {
-    struct timeval  actual_time;
-    long int time;
+	struct timeval	actual_time;
+	long int		time;
 
-    gettimeofday(&actual_time, NULL);
-    time = (actual_time.tv_sec * 1000) + (actual_time.tv_usec / 1000);
-    return (time);
+	gettimeofday(&actual_time, NULL);
+	time = (actual_time.tv_sec * 1000) + (actual_time.tv_usec / 1000);
+	return (time);
 }
 
-int ft_usleep(long int ms_time)
+int	ft_usleep(long int ms_time)
 {
-    long int before;
-    long int after;
+	long int	before;
+	long int	after;
 
-    before = get_time();
-    after = get_time();
-    while(after - before < ms_time)
-    {
-        usleep(ms_time / 10);
-        after = get_time();
-    }
-    return (1);
+	before = get_time();
+	after = get_time();
+	while (after - before < ms_time)
+	{
+		usleep(ms_time / 10);
+		after = get_time();
+	}
+	return (1);
 }
 
-void    ft_write(char *msg, t_philo *philo)
+void	ft_write(char *msg, t_philo *philo)
 {
-    printf("%ld ", get_time() - philo->arg->start_time);
-    printf("%d ", philo->pos);
-    printf("%s\n", msg);
+	printf("%ld ", get_time() - philo->arg->start_time);
+	printf("%d ", philo->pos);
+	printf("%s\n", msg);
 }
