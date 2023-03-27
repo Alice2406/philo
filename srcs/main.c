@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 12:11:35 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/22 14:34:43 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/27 19:20:02 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,18 @@ int	ft_check_param(char **av, int ac, t_data *data)
 	return (1);
 }
 
+int	philo_shrodinger2(t_data *data)
+{
+	pthread_mutex_lock(&data->arg.death);
+	if (data->arg.stop)
+	{
+		pthread_mutex_unlock(&data->arg.death);
+		return(0);
+	}
+	pthread_mutex_unlock(&data->arg.death);
+	return (1);
+}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -92,5 +104,7 @@ int	main(int ac, char **av)
 		ft_error("malloc struct failed", &data, 0);
 	ft_init(&data);
 	create_thread(&data);
-	while (1);
+	while(1);
+	// while (!philo_shrodinger2(&data))
+	// 	ft_usleep(1);
 }

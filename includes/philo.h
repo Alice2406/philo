@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:54:58 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/27 13:26:51 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/27 19:15:03 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ typedef struct s_arg {
 	int				nb_eat;
 	long int		start_time;
 	int				nb_p_finish;
-	int				dead;
+	int				stop;
+	pthread_mutex_t	death;
 	pthread_mutex_t	eat;
 	pthread_mutex_t	writing;
-	pthread_mutex_t death;
-	int				finish;
+	pthread_mutex_t	finish;
 }				t_arg;
 
 typedef struct s_philo {
@@ -42,6 +42,7 @@ typedef struct s_philo {
 	pthread_mutex_t	*rfork;
 	pthread_mutex_t	lfork;
 	t_arg			*arg;
+	pthread_t		philo_dead_id;
 	pthread_t		thread_philo;
 }				t_philo;
 
@@ -58,5 +59,6 @@ int			ft_usleep(long int ms_time);
 void		routine(t_philo *philo);
 void		ft_write(char *msg, t_philo *philo);
 void		sleep_think(t_philo *philo);
+int	philo_shrodinger(t_philo *philo);
 
 #endif
