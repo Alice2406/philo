@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:54:58 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/22 14:40:19 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:26:51 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ typedef struct s_arg {
 	int				nb_eat;
 	long int		start_time;
 	int				nb_p_finish;
+	int				dead;
 	pthread_mutex_t	eat;
 	pthread_mutex_t	writing;
+	pthread_mutex_t death;
 	int				finish;
 }				t_arg;
 
