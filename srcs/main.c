@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 12:11:35 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 12:25:13 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:33:47 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,15 @@ int	ft_check_param(char **av, int ac, t_data *data)
 
 int	philo_shrodinger2(t_data *data)
 {
-	pthread_mutex_lock(&data->arg.death);
+	if (pthread_mutex_lock(&data->arg.death) != 0)
+		return (0);
 	if (data->arg.stop)
 	{
 		pthread_mutex_unlock(&data->arg.death);
-		return(0);
+		return (0);
 	}
-	pthread_mutex_unlock(&data->arg.death);
+	if (pthread_mutex_unlock(&data->arg.death) != 0)
+		return (0);
 	return (1);
 }
 
@@ -102,10 +104,10 @@ int	main(int ac, char **av)
 	data.philo = malloc(sizeof(t_philo) * data.arg.nb_philo);
 	if (!data.philo)
 		ft_error("malloc struct failed", &data, 0);
-	ft_init(&data);
-	create_thread(&data);
-	while (philo_shrodinger2(&data))
-		ft_usleep(1);
-	if (data.arg.stop == 2)
-		printf("Each philosopher ate %d time(s)\n", data.arg.nb_eat);
+	if (ft_init(&data) == 0 || create_thread(&data) == 0)
+	{
+		free(data.philo);
+		return (0);
+	}
+	stop_code(&data);
 }

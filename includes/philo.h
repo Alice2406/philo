@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:54:58 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 11:31:11 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:36:59 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ typedef struct s_data {
 }				t_data;
 
 int			create_thread(t_data *data);
-void		ft_init(t_data *data);
+int			ft_init(t_data *data);
 void		ft_error(char *msg, t_data *data, int free_philos);
 long int	get_time(void);
 int			ft_usleep(long int ms_time);
-void		routine(t_philo *philo);
+int			routine(t_philo *philo);
 void		ft_write(char *msg, t_philo *philo);
-void		sleep_think(t_philo *philo);
-int	philo_shrodinger(t_philo *philo);
-
+int			sleep_think(t_philo *philo);
+int			philo_shrodinger(t_philo *philo);
+void		stop_code(t_data *data);
+int			philo_shrodinger2(t_data *data);
 #endif
