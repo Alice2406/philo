@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:29:24 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/27 19:23:15 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:40:27 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	*philo_dead(void *s)
 	}
 	pthread_mutex_unlock(&philo->arg->finish);
 	pthread_mutex_unlock(&philo->arg->eat);
-	exit(0);
+	return (NULL);
 }
 
 void	*start_lunch(void *s)
@@ -58,14 +58,13 @@ void	*start_lunch(void *s)
 		pthread_detach(philo->philo_dead_id);
 		if (philo->arg->nb_p_finish == philo->arg->nb_philo)
 		{
-			if(pthread_mutex_lock(&philo->arg->finish) == 0)
-				return (NULL);
+			pthread_mutex_lock(&philo->arg->finish);
 			pthread_mutex_lock(&philo->arg->writing);
 			printf("Everybody ate %d times\n", philo->arg->nb_eat);
 			pthread_mutex_unlock(&philo->arg->writing);
 			pthread_mutex_unlock(&philo->arg->finish);
 			philo->arg->stop = 2;
-			exit(0);
+			return (NULL);
 		}
 	}
 	return (NULL);

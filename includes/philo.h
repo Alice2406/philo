@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:54:58 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/27 19:15:03 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:31:11 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_philo {
 	int				nb_times_ate;
 	int				finish;
 	int				pos;
-	int				start_eat;
+	long int		start_eat;
 	pthread_mutex_t	*rfork;
 	pthread_mutex_t	lfork;
 	t_arg			*arg;

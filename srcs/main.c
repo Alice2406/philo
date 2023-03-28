@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 12:11:35 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/27 19:20:02 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:34:22 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int	main(int ac, char **av)
 		ft_error("malloc struct failed", &data, 0);
 	ft_init(&data);
 	create_thread(&data);
-	while(1);
-	// while (!philo_shrodinger2(&data))
-	// 	ft_usleep(1);
+	while (philo_shrodinger2(&data))
+		ft_usleep(1);
 }
