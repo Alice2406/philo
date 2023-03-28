@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:54:58 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 13:36:59 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:19:58 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			ft_usleep(long int ms_time);
 int			routine(t_philo *philo);
 void		ft_write(char *msg, t_philo *philo);
 int			sleep_think(t_philo *philo);
-int			philo_shrodinger(t_philo *philo);
+int			philo_shrodinger(t_philo *philo, int i);
 void		stop_code(t_data *data);
 int			philo_shrodinger2(t_data *data);
 #endif

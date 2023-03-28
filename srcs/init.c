@@ -6,16 +6,18 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:29:24 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 13:10:30 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:19:46 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	philo_shrodinger(t_philo *philo)
+int	philo_shrodinger(t_philo *philo, int i)
 {
 	if (pthread_mutex_lock(&philo->arg->death) != 0)
 		return (0);
+	if (i)
+		philo->arg->stop = i;
 	if (philo->arg->stop)
 	{
 		pthread_mutex_unlock(&philo->arg->death);
@@ -36,7 +38,7 @@ void	*philo_dead(void *s)
 		return (NULL);
 	if (pthread_mutex_lock(&philo->arg->finish) != 0)
 		return (NULL);
-	if (philo_shrodinger(philo) && !philo->finish
+	if (philo_shrodinger(philo, 0) && !philo->finish
 		&& (get_time() - philo->start_eat >= philo->arg->time_dead))
 	{
 		if (pthread_mutex_lock(&philo->arg->writing) != 0)
@@ -44,7 +46,7 @@ void	*philo_dead(void *s)
 		ft_write("is died", philo);
 		if (pthread_mutex_unlock(&philo->arg->writing) != 0)
 			return (NULL);
-		philo->arg->stop = 1;
+		philo_shrodinger(philo, 1);
 	}
 	if (pthread_mutex_unlock(&philo->arg->finish) != 0)
 		return (NULL);
@@ -59,7 +61,7 @@ void	*start_lunch(void *s)
 	philo = (t_philo *)s;
 	if (philo->pos % 2 == 0)
 		ft_usleep(philo->arg->time_eat / 10);
-	while (philo_shrodinger(philo))
+	while (philo_shrodinger(philo, 0))
 	{
 		if (pthread_create(&philo->philo_dead_id, NULL, philo_dead, s) != 0)
 			return (NULL);
@@ -73,7 +75,7 @@ void	*start_lunch(void *s)
 			philo->finish = 1;
 			philo->arg->nb_p_finish++;
 			if (philo->arg->nb_p_finish == philo->arg->nb_philo)
-				philo->arg->stop = 2;
+				philo_shrodinger(philo, 2);
 			pthread_mutex_unlock(&philo->arg->finish);
 			return (NULL);
 		}
@@ -101,6 +103,7 @@ int	ft_init(t_data *data)
 	i = 0;
 	data->arg.start_time = get_time();
 	data->arg.nb_p_finish = 0;
+	data->arg.stop = 0;
 	if (init_mutex(data) == 0)
 		return (0);
 	while (i < data->arg.nb_philo)

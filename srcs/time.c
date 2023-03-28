@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:21:33 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/22 14:36:30 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:32:48 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int	ft_usleep(long int ms_time)
 
 void	ft_write(char *msg, t_philo *philo)
 {
-	printf("%ld ", get_time() - philo->arg->start_time);
-	printf("%d ", philo->pos);
-	printf("%s\n", msg);
+	if (philo_shrodinger(philo, 0))
+	{
+		printf("%ld ", get_time() - philo->arg->start_time);
+		printf("%d ", philo->pos);
+		printf("%s\n", msg);
+	}
 }

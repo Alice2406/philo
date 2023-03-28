@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:11:22 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 13:09:39 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 14:30:15 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ int	routine(t_philo *philo)
 	ft_write("has taken a fork", philo);
 	if (pthread_mutex_unlock(&philo->arg->writing) != 0)
 		return (0);
+	if (!philo->rfork)
+	{
+		ft_usleep(philo->arg->time_dead * 2);
+		return (0);
+	}
 	if (pthread_mutex_lock(philo->rfork) != 0)
 		return (0);
 	if (pthread_mutex_lock(&philo->arg->writing) != 0)
