@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 16:11:22 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 11:31:46 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:32:36 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,6 @@ void	eat_time(t_philo *philo)
 	pthread_mutex_unlock(&philo->arg->writing);
 	ft_write("is eating", philo);
 	pthread_mutex_lock(&philo->arg->eat);
-	philo->nb_times_ate++;
-	pthread_mutex_lock(&philo->arg->finish);
-	if (philo->finish != 1 && philo->arg->nb_eat != -1 && philo->nb_times_ate == philo->arg->nb_eat)
-	{
-		philo->finish = 1;
-		philo->arg->nb_p_finish++;
-	}
-	pthread_mutex_unlock(&philo->arg->finish);
 	philo->start_eat = get_time();
 	pthread_mutex_unlock(&philo->arg->eat);
 	ft_usleep(philo->arg->time_eat);

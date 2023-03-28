@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 12:11:35 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 11:34:22 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:25:13 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,6 @@ int	main(int ac, char **av)
 	create_thread(&data);
 	while (philo_shrodinger2(&data))
 		ft_usleep(1);
+	if (data.arg.stop == 2)
+		printf("Each philosopher ate %d time(s)\n", data.arg.nb_eat);
 }
