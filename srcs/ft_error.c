@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:40:02 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 16:26:27 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:26:59 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_error(char *msg, t_data *data, int free_philos)
 
 void	stop_code(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (philo_shrodinger2(data))

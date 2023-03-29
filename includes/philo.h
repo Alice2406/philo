@@ -6,7 +6,7 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:54:58 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 16:26:16 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:26:11 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# define INT_MAX 2147483647
 
 typedef struct s_arg {
 	int				nb_philo;
@@ -56,10 +58,17 @@ int			ft_init(t_data *data);
 void		ft_error(char *msg, t_data *data, int free_philos);
 long int	get_time(void);
 int			ft_usleep(long int ms_time);
-int			routine(t_philo *philo);
+void		routine(t_philo *philo);
 void		ft_write(char *msg, t_philo *philo);
-int			sleep_think(t_philo *philo);
-int			philo_shrodinger(t_philo *philo, int i);
+void		sleep_think(t_philo *philo);
 void		stop_code(t_data *data);
 int			philo_shrodinger2(t_data *data);
+
+void		*philo_dead(void *s);
+int			philo_shrodinger(t_philo *philo, int i);
+
+int			is_digit(char **str);
+int			ft_strlen(char *str);
+long		ft_atol(const char *str);
+
 #endif

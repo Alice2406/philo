@@ -6,53 +6,11 @@
 /*   By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:29:24 by aniezgod          #+#    #+#             */
-/*   Updated: 2023/03/28 14:19:46 by aniezgod         ###   ########.fr       */
+/*   Updated: 2023/03/29 10:22:57 by aniezgod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	philo_shrodinger(t_philo *philo, int i)
-{
-	if (pthread_mutex_lock(&philo->arg->death) != 0)
-		return (0);
-	if (i)
-		philo->arg->stop = i;
-	if (philo->arg->stop)
-	{
-		pthread_mutex_unlock(&philo->arg->death);
-		return (0);
-	}
-	if (pthread_mutex_unlock(&philo->arg->death) != 0)
-		return (0);
-	return (1);
-}
-
-void	*philo_dead(void *s)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)s;
-	ft_usleep(philo->arg->time_dead + 1);
-	if (pthread_mutex_lock(&philo->arg->eat) != 0)
-		return (NULL);
-	if (pthread_mutex_lock(&philo->arg->finish) != 0)
-		return (NULL);
-	if (philo_shrodinger(philo, 0) && !philo->finish
-		&& (get_time() - philo->start_eat >= philo->arg->time_dead))
-	{
-		if (pthread_mutex_lock(&philo->arg->writing) != 0)
-			return (NULL);
-		ft_write("is died", philo);
-		if (pthread_mutex_unlock(&philo->arg->writing) != 0)
-			return (NULL);
-		philo_shrodinger(philo, 1);
-	}
-	if (pthread_mutex_unlock(&philo->arg->finish) != 0)
-		return (NULL);
-	pthread_mutex_unlock(&philo->arg->eat);
-	return (NULL);
-}
 
 void	*start_lunch(void *s)
 {
@@ -70,8 +28,7 @@ void	*start_lunch(void *s)
 			return (NULL);
 		if (++philo->nb_times_ate == philo->arg->nb_eat)
 		{
-			if (pthread_mutex_lock(&philo->arg->finish) != 0)
-				return (NULL);
+			pthread_mutex_lock(&philo->arg->finish);
 			philo->finish = 1;
 			philo->arg->nb_p_finish++;
 			if (philo->arg->nb_p_finish == philo->arg->nb_philo)

@@ -6,7 +6,7 @@
 #    By: aniezgod <aniezgod@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/08 16:25:39 by aniezgod          #+#    #+#              #
-#    Updated: 2023/03/21 16:15:10 by aniezgod         ###   ########.fr        #
+#    Updated: 2023/03/29 10:33:17 by aniezgod         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,24 +29,24 @@ SRCS =	./srcs/main.c \
 		./srcs/ft_error.c \
 		./srcs/time.c \
 		./srcs/routine.c \
+		./srcs/ft_dead.c \
+		./srcs/utils.c \
 
 OBJS = ${SRCS:.c=.o}
 
 NAME = philo
-CFLAGS = -Wall -Wextra -Werror
+INCS = ./includes
+CFLAGS = -Wall -Wextra -Werror -g -I $(INCS) -pthread
 RM = rm -f
-INCS = -I ./includes
+CC = gcc
 
 all: ${NAME}
-
-.c.o:
-			@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} ${INCS}
 
 $(NAME): $(OBJS)
 			@printf "${WHITE}${BOLD}╔════════════════════════════════════════════════════════════════════════════╗\n"
 			@printf "${BOLD}║                              .: COMPILATION :.                             ║\n"
 			@printf "${BOLD}╚════════════════════════════════════════════════════════════════════════════╝\n"
-			@gcc ${CFLAGS} -o $(NAME) $(OBJS) ${INCS}
+			@$(CC) ${CFLAGS} $(OBJS) -o $(NAME)
 			@printf "${BOLD}║                                   ${PURPLE}${NAME}                                    ${WHITE}║\n"
 			@printf "${BOLD}╚════════════════════════════════════════════════════════════════════════════╝\n"
 
